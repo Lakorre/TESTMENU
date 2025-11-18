@@ -10817,38 +10817,6 @@ if GetResourceState("wasabi_multijob") == 'started' then
 end
 
 
-if GetResourceState("ElectronAC") == 'started' then
-    AddTrigger({ type = "button", label = "ElectronAC Admin Panel",
-        onSelect = function()
-        MachoInjectResourceRaw("ElectronAC", [[
-        SetNuiFocus(true, true)
-        SendNUIMessage({
-            action = "menu",
-            data = {
-                info = {
-                    adminContext = {
-                        master = true,
-                        permissions = { "all" }
-                    },
-                    identifiers = {
-                        ["ip"] = "127.0.0.1",
-                        ["license"] = "",
-                        ["license2"] = "",
-                    },
-                    permissions = {
-                        adminMenu = true,
-                        whitelisted = true
-                    }
-                },
-                open = true,
-                setOpen = true
-            }
-        })
-        ]])
-        end
-    })
-end
-
 if GetResourceState("spoodyFraud") == 'started' then
     AddTrigger({ type = "button", label = "Give Money #1",
         onSelect = function()
