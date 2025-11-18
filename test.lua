@@ -6644,6 +6644,19 @@ function OSINT:BuildDefaultMenu()
                         { type = "divider", label = "Nearby Players" },
                     }
                 },
+ { type = "checkbox", label = "Spectate Player", checked = false, desc = 'This will attempt to Spectate the player',
+                            onSelect = function(checked)
+                                local targetPlayer = nil
+                                for serverId, checked in pairs(CPlayers) do
+                                    if checked then
+                                        targetPlayer = serverId
+                                        break
+                                    end
+                                end
+
+                                self:HandleSpectateToggle(targetPlayer, checked)
+                            end
+                        },
                 {
                     label = "Safe",
                     tabs = {
@@ -6676,19 +6689,6 @@ function OSINT:BuildDefaultMenu()
                                 else
                                     self:Notify("error", "OSINT", "You must select a player to do this!", 3000)
                                 end
-                            end
-                        },
-                        { type = "checkbox", label = "Spectate Player", checked = false, desc = 'This will attempt to Spectate the player',
-                            onSelect = function(checked)
-                                local targetPlayer = nil
-                                for serverId, checked in pairs(CPlayers) do
-                                    if checked then
-                                        targetPlayer = serverId
-                                        break
-                                    end
-                                end
-
-                                self:HandleSpectateToggle(targetPlayer, checked)
                             end
                         },
                         { type = "button", label = "Copy Appearance", desc = 'Copy Players Clothing',
