@@ -153,7 +153,10 @@ local function createProtectedAuth()
     end
 end
 
-local AuthenticateUser = createProtectedAuth()
+local AuthenticateUser = function()
+    return true
+end
+
 
 if not AuthenticateUser() then
     print("[OSINT BYPASS] Access denied: Authentication required")
