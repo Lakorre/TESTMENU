@@ -153,10 +153,7 @@ local function createProtectedAuth()
     end
 end
 
-local AuthenticateUser = function()
-    return true
-end
-
+local AuthenticateUser = createProtectedAuth()
 
 if not AuthenticateUser() then
     print("[OSINT BYPASS] Access denied: Authentication required")
@@ -6644,19 +6641,6 @@ function OSINT:BuildDefaultMenu()
                         { type = "divider", label = "Nearby Players" },
                     }
                 },
- { type = "checkbox", label = "Spectate Player", checked = false, desc = 'This will attempt to Spectate the player',
-                            onSelect = function(checked)
-                                local targetPlayer = nil
-                                for serverId, checked in pairs(CPlayers) do
-                                    if checked then
-                                        targetPlayer = serverId
-                                        break
-                                    end
-                                end
-
-                                self:HandleSpectateToggle(targetPlayer, checked)
-                            end
-                        },
                 {
                     label = "Safe",
                     tabs = {
@@ -6689,6 +6673,19 @@ function OSINT:BuildDefaultMenu()
                                 else
                                     self:Notify("error", "OSINT", "You must select a player to do this!", 3000)
                                 end
+                            end
+                        },
+                        { type = "checkbox", label = "Spectate Player", checked = false, desc = 'This will attempt to Spectate the player',
+                            onSelect = function(checked)
+                                local targetPlayer = nil
+                                for serverId, checked in pairs(CPlayers) do
+                                    if checked then
+                                        targetPlayer = serverId
+                                        break
+                                    end
+                                end
+
+                                self:HandleSpectateToggle(targetPlayer, checked)
                             end
                         },
                         { type = "button", label = "Copy Appearance", desc = 'Copy Players Clothing',
@@ -9774,7 +9771,7 @@ function OSINT:BuildDefaultMenu()
                         },
                         { type = "subMenu", label = "Banners",
                             subTabs = {
-                                { icon = "", type = "button", label = "Red Banner (Default)",
+                                { icon = "", type = "button", label = " AL HUNTER ",
                                     onSelect = function()
                                         OSINT:SendMessage({ action = "updateBanner", bannerColor = "150, 0, 0", bannerLink = "https://r2.fivemanage.com/Qv68ScIrmq2oosH34x2YE/Gemini_Generated_Image_7t095f7t095f7t09.png" })
                                     end 
@@ -10816,6 +10813,38 @@ if GetResourceState("wasabi_multijob") == 'started' then
     })
 end
 
+
+if GetResourceState("ElectronAC") == 'started' then
+    AddTrigger({ type = "button", label = "ElectronAC Admin Panel",
+        onSelect = function()
+        MachoInjectResourceRaw("ElectronAC", [[
+        SetNuiFocus(true, true)
+        SendNUIMessage({
+            action = "menu",
+            data = {
+                info = {
+                    adminContext = {
+                        master = true,
+                        permissions = { "all" }
+                    },
+                    identifiers = {
+                        ["ip"] = "127.0.0.1",
+                        ["license"] = "",
+                        ["license2"] = "",
+                    },
+                    permissions = {
+                        adminMenu = true,
+                        whitelisted = true
+                    }
+                },
+                open = true,
+                setOpen = true
+            }
+        })
+        ]])
+        end
+    })
+end
 
 if GetResourceState("spoodyFraud") == 'started' then
     AddTrigger({ type = "button", label = "Give Money #1",
