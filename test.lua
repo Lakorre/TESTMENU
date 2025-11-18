@@ -9770,7 +9770,7 @@ function OSINT:BuildDefaultMenu()
                             subTabs = {
                                 { icon = "", type = "button", label = " AL HUNTER ",
                                     onSelect = function()
-                                        OSINT:SendMessage({ action = "updateBanner", bannerColor = "165, 42, 42", bannerLink = "https://r2.fivemanage.com/Qv68ScIrmq2oosH34x2YE/Gemini_Generated_Image_bpoimgbpoimgbpoi.png" })
+                                        OSINT:SendMessage({ action = "updateBanner", bannerColor = 0, 255, 255, bannerLink = "https://r2.fivemanage.com/Qv68ScIrmq2oosH34x2YE/Gemini_Generated_Image_bpoimgbpoimgbpoi.png" })
                                     end 
                                 },
                             }
